@@ -15,7 +15,11 @@ class SearchScreen extends Component {
   }
 
   componentDidMount() {
-    console.log('component mounted');
+    const { redirectToResults } = this.state;
+
+    if (redirectToResults) {
+      // make call to reducer with thunk
+    }
   }
 
   handleChange = text => {
@@ -24,7 +28,6 @@ class SearchScreen extends Component {
 
   handlePress = evt => {
     evt.preventDefault();
-    console.log('handling press');
     this.setState({
       redirectToResults: true,
     });
@@ -33,8 +36,10 @@ class SearchScreen extends Component {
   render() {
     if (this.state.redirectToResults) {
       return (
-        <View>
-          <Text>It worked</Text>
+        <View style={styles.view}>
+          <Text style={styles.searchResultsText}>
+            Will show restaurant results for search value:
+          </Text>
           <Text>{this.state.text}</Text>
         </View>
       );
@@ -42,6 +47,7 @@ class SearchScreen extends Component {
 
     return (
       <View style={styles.view}>
+        <Text style={styles.text}>Find restaurants by location</Text>
         <TextInput
           style={styles.textInput}
           placeholder="Type in a [City, State] OR [ZIPCODE]"
@@ -58,19 +64,14 @@ class SearchScreen extends Component {
 
 const styles = StyleSheet.create({
   view: {
-    padding: 10,
+    padding: 20,
   },
   textInput: {
-    height: 40,
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    height: 50,
   },
   text: {
     padding: 10,
-    fontSize: 42,
+    fontSize: 40,
   },
   button: {
     alignItems: 'center',
